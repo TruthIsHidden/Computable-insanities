@@ -1,0 +1,38 @@
+BOB(n)
+
+Input: A positive integer n.
+
+Step 1 — Grid construction
+- Construct a square grid of size n^(2n) × n^(2n).
+- Total number of cells: n^(4n).
+- Each cell may take one of the values {0, 1, n}.
+- Constraint: In every row, at most floor(n/2) cells may have the value n.
+
+Step 2 — Row factorials
+For each row r:
+  • Compute its row sum S_r (sum of all cell values in that row).
+  • Compute the factorial of the row sum: S_r!.
+
+Step 3 — Grid sum
+Let the grid sum be:
+    G = Σ S_r!     (summed over all n^(2n) rows).
+
+Step 4 — Iteration
+- Replace n by the value G.
+- Repeat Steps 1–3 exactly n times.
+- Let G_final be the grid sum obtained after the n-th iteration.
+
+Step 5 — Meta-iteration (fg)
+1. Compute X = (G_final)^n.
+2. Compute m = sum of the prime factors of X
+     (counting each prime factor with multiplicity).
+3. Repeatedly subtract:
+        m := m − (G_final)^2
+   until m < 0.
+4. Let fg be the number of subtractions performed.
+
+Step 6 — Final output
+BOB(n) is defined as:
+        BOB(n) = (G_final)^(fg)!
+
+Output: The integer BOB(n).
