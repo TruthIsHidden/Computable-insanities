@@ -3,7 +3,7 @@ G(n)
 Input: A positive integer n.
 
 Step 1 — Base value
-Let k = n^n^n^n.     (an exponent tower of height 4)
+Let k = n^2n   
 
 Step 2 — Initial number
 Construct a K-digit decimal number S such that:
