@@ -3,12 +3,12 @@ G(n)
 Input: A positive integer n.
 
 Step 1 — Base value
-Let k = n^2n   
+Let K = (n^4)^(2n)    # i.e. K = n^(8n)
 
 Step 2 — Initial number
 Construct a K-digit decimal number S such that:
-  • S has exactly K digits (leading zeros allowed),
-  • the average of the digit sum of S, should be around 4 - 6.
+  • S has exactly K digits (leading zeros allowed).
+  • the average digit value of S is approximately 4–6.
   • the digits and their order are otherwise arbitrary/random.
 
 Step 3 — Allowed digit operations
@@ -22,31 +22,30 @@ All operations are performed modulo 10, so digits remain in {0,…,9}.
 
 Step 4 — Global constraints on operation sequences
 A sequence of digit operations is valid only if:
-  • No operation type occurs more than 2 times consecutively.
-  • In every contiguous block of 10 operations,
-       each of the operation types A, B, and C
-       appears at least twice.
+  • For any digit position you may either apply exactly one operation (A–E) or do nothing.
+  • If you do nothing at a digit position you may optionally append digits to the right of S in groups of 2. Each appended group is two decimal digits (00–99).
+  • The total number of appended digit-groups across the entire sequence is bounded by K (i.e., ≤ K appended groups).  # ensures finiteness.
 
 Step 5 — Composite formation
-Let C be the integer represented by S.
-If C is prime, increase C to the next composite integer.
-Let N = C^4.
+Let C be the integer represented by the original S (before any appends).
+If C is prime, replace C by the next larger composite integer.
+Let M = C^K * 30031.
 
 Step 6 — Producing candidate integers
-From any valid operation sequence applied to S:
-  • Let S′ be the resulting K-digit number.
-  • You may optionally remove exactly one digit from S′ to obtain v.
-  • Append no additional digits.
+From any valid operation sequence applied to S (including any allowed appends):
+  • Let S′ be the resulting decimal string (original K digits modified per-step, plus any appended digits, so S′ has length between K and K+2K = 3K).
+  • You may optionally remove exactly one digit from S′ to obtain v (i.e., either keep S′ unchanged or remove one digit).
+  • No further digits may be appended after this step.
 The integer v is the candidate produced by that sequence.
 
 Step 7 — Divisibility condition
 A sequence is counted if its produced integer v satisfies:
-       v divides C^K     (i.e., v | C^K).
+       v divides M    (i.e., v | C^K * 30031).
 
 Step 8 — Final output
 G(n) = total number of valid operation sequences
        which produce at least one integer v
-       (after the optional digit removal)
-       that divides C^K.
+       (after the optional single-digit removal)
+       that divides C^K * 30031.
 
 Output: The integer G(n)!
