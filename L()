@@ -1,0 +1,57 @@
+SYSTEM NAME: Maximal Oscillatory Object (MOO)
+
+INPUT:
+- n: Number of states of the object (integer ≥ 1)
+
+INITIALIZATION:
+- Create n states: S1, S2, ..., Sn
+- Each state has a magnitude/value, initially 0
+- Maximum magnitude per state: f = n
+
+RULES / OPERATIONS:
+
+1. Movement:
+   - Start at state S1
+   - From S1, you can only move right to S2
+   - From Si (2 ≤ i ≤ n-1), you can move left (Si-1) or right (Si+1)
+   - From Sn, you can only move left to Sn-1
+
+2. Increment Operations:
+   a) Add +1 to current state
+   b) Add +2 to current state, subject to:
+       - +2 can only occur once per 2 consecutive moves
+       - Trigger effects:
+           i) Decrease the highest-magnitude state by 1 (floor 0)
+           ii) Increase the lowest-magnitude state by 1 (cap f)
+
+3. Flip Operation:
+   - Every 2 moves, apply flip to all states:
+       For each state Si: Si_new = f - Si
+       (Magnitude is reflected relative to the maximum)
+
+4. Ordering Constraint:
+   - No state Si can reach magnitude m unless state Sm-1 has magnitude m-1
+   - Ensures sequential progression (cannot skip magnitude)
+
+5. Periodic Injection:
+   - Every k moves (k=160), optionally:
+       - Add +1 to all states
+       - Newly introduced states start at n (or defined value) but must reach max = n+1
+
+GOAL:
+- Maximize all states to magnitude f (or f+1 for newly added states)
+- While following the oscillation, +2 restrictions, flips, and periodic injections
+
+OUTPUT:
+- Longest valid sequence of moves satisfying all rules
+- Each move records:
+    a) Current state chosen
+    b) Operation applied (+1, +2)
+    c) Trigger effects applied
+    d) Flip applied if applicable
+    e) Current magnitudes of all states
+
+NOTES:
+- System is finite and bounded
+- Growth of maximal move sequences is extremely fast, comparable to or surpassing Busy Beaver numbers for small n
+- States can oscillate repeatedly, producing long sequences before reaching the maximum magnitudes
