@@ -18,7 +18,7 @@ Step 2 — Allowed numbers and operations
 Step 3 — Representation count per digit
     For each digit di of S:
         1. Consider all finite sequences of operations using Ops
-           and operands from D that produce an integer r
+           and operands from D that produce an integer r(A SEQUENCE CANNOT HAVE MORE THAN, K^K operations)
            such that the decimal representation of r contains digit di.
         2. Let m_i = total number of such sequences for digit di.
 
