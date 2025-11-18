@@ -23,4 +23,4 @@ Step 3 — Representation count per digit
         2. Let m_i = total number of such sequences for digit di.
 
 Step 4 — Final value
-    Multiply all m_i-to the power of n, produced for every digit, therefore if for number xyz, each digit produced a,b,c, the final value of F_mini((abc)^n)
+    Multiply all m_i-to the power of n, produced for every digit, therefore if for number xyz, each digit produced a,b,c, the final value of F_mini(abc)
